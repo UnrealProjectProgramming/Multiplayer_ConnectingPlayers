@@ -2,13 +2,14 @@
 
 #include "MovingPlatform.h"
 #include "Components/BoxComponent.h"
+#include "Runtime/Engine/Classes/GameFramework/Actor.h"
 
 
 AMovingPlatform::AMovingPlatform()
 {
 	PrimaryActorTick.bCanEverTick = true;
 		
-	MoveFactor = 200.0f;
+	Speed = 200.0f;
 
 	SetMobility(EComponentMobility::Movable);
 }
@@ -32,8 +33,9 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 	{
 		// THIS CODE WILL RUN ON THE SERVER
 		FVector Location = GetActorLocation();
-		auto ActorForwardVector = GetActorForwardVector();
-		Location += ActorForwardVector * MoveFactor * DeltaSeconds;
+		FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+		auto Direction = (GlobalTargetLocation - Location).GetSafeNormal();
+		Location += Direction * Speed * DeltaSeconds;
 		SetActorLocation(Location);
 
 	}

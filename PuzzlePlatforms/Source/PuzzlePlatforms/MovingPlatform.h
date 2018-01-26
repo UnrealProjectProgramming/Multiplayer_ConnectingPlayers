@@ -24,7 +24,9 @@ public:
 	virtual void BeginPlay() override;
 
 protected:
-	UPROPERTY(EditAnywhere, Category = "Platforms")
-	float MoveFactor;
+	UPROPERTY(EditAnywhere, Category = "Moving Platforms")
+	float Speed;
 	
+	UPROPERTY(EditAnywhere, Category = "Moving Platforms", Meta = (MakeEditWidget = "true"))
+	FVector TargetLocation;
 };
