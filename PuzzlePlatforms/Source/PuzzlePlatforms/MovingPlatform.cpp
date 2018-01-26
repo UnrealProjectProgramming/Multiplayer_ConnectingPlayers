@@ -43,6 +43,7 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 
 		if (JournyTravelled >= JournyLength)
 		{
+			//THIS IS MANUAL SWAPING WITHOUT USING THE FUNCTION
 			//FVector Swap = GlobalStartLocation;
 			//GlobalStartLocation = GlobalTargetLocation;
 			//GlobalTargetLocation = Swap;
@@ -52,8 +53,6 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 		FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
 		Location += Direction * Speed * DeltaSeconds;
 		SetActorLocation(Location);
-	
-
 	}
 	else
 	{
