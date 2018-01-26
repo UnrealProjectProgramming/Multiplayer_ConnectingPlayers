@@ -21,6 +21,7 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 	
+	virtual void BeginPlay() override;
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Platforms")
