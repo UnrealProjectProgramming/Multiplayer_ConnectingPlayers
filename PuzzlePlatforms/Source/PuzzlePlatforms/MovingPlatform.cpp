@@ -3,6 +3,7 @@
 #include "MovingPlatform.h"
 #include "Components/BoxComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
+#include "Runtime/Engine/Classes/Engine/TargetPoint.h"
 
 
 AMovingPlatform::AMovingPlatform()
@@ -21,8 +22,12 @@ void AMovingPlatform::BeginPlay()
 	{
 		SetReplicates(true); // both of SetReplicates Runs only on the SERVER and it sends to the client to update the Replicate.
 		SetReplicateMovement(true);
-	}
+	} 
+
+    GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation); // get the global target location instead of the current relative location
+	GlobalStartLocation = GetActorLocation(); // This is the initial Actor location
 }
+
 
 void AMovingPlatform::Tick(float DeltaSeconds)
 {
@@ -32,11 +37,22 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 	if (HasAuthority()) 
 	{
 		// THIS CODE WILL RUN ON THE SERVER
-		FVector Location = GetActorLocation();
-		FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
-		auto Direction = (GlobalTargetLocation - Location).GetSafeNormal();
+		FVector Location = GetActorLocation(); // the actor location being updated every single Tick
+		float JournyLength = (GlobalTargetLocation - GlobalStartLocation).Size(); // The length of the journy  
+		float JournyTravelled = (Location - GlobalStartLocation).Size(); // the legnth of the travelled journy
+
+		if (JournyTravelled >= JournyLength)
+		{
+			//FVector Swap = GlobalStartLocation;
+			//GlobalStartLocation = GlobalTargetLocation;
+			//GlobalTargetLocation = Swap;
+			Swap(GlobalStartLocation, GlobalTargetLocation);
+		}
+
+		FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
 		Location += Direction * Speed * DeltaSeconds;
 		SetActorLocation(Location);
+	
 
 	}
 	else
@@ -45,5 +61,6 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 	}
 	
 }
+
 
 
