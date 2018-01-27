@@ -20,8 +20,12 @@ public:
 	AMovingPlatform();
 
 	virtual void Tick(float DeltaSeconds) override;
+
 	
 	virtual void BeginPlay() override;
+
+	void AddActiveTrigger();
+	void RemoveActiveTrigger();
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Moving Platforms")
@@ -30,10 +34,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Moving Platforms", Meta = (MakeEditWidget = "true"))
 	FVector TargetLocation;
 
-	UPROPERTY(EditAnywhere, Category = "Moving Platforms")
-	TArray < class ATargetPoint* > TargetPoints;
+
 private:
 	FVector GlobalTargetLocation;
 	FVector GlobalStartLocation;
 
+	UPROPERTY(EditAnywhere)
+	int ActiveTriggers = 1;
 };

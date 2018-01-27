@@ -3,7 +3,6 @@
 #include "MovingPlatform.h"
 #include "Components/BoxComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
-#include "Runtime/Engine/Classes/Engine/TargetPoint.h"
 
 
 AMovingPlatform::AMovingPlatform()
@@ -33,32 +32,47 @@ void AMovingPlatform::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	// This If will run only if HasAuthority returns TRUE And it will return True only when It is on the server , if it is a client it retunrs false.
-	if (HasAuthority()) 
+	if (ActiveTriggers > 0)
 	{
-		// THIS CODE WILL RUN ON THE SERVER
-		FVector Location = GetActorLocation(); // the actor location being updated every single Tick
-		float JournyLength = (GlobalTargetLocation - GlobalStartLocation).Size(); // The length of the journy  
-		float JournyTravelled = (Location - GlobalStartLocation).Size(); // the legnth of the travelled journy
-
-		if (JournyTravelled >= JournyLength)
+		// This If will run only if HasAuthority returns TRUE And it will return True only when It is on the server , if it is a client it retunrs false.
+		if (HasAuthority())
 		{
-			//THIS IS MANUAL SWAPING WITHOUT USING THE FUNCTION
-			//FVector Swap = GlobalStartLocation;
-			//GlobalStartLocation = GlobalTargetLocation;
-			//GlobalTargetLocation = Swap;
-			Swap(GlobalStartLocation, GlobalTargetLocation);
-		}
+			// THIS CODE WILL RUN ON THE SERVER
+			FVector Location = GetActorLocation(); // the actor location being updated every single Tick
+			float JournyLength = (GlobalTargetLocation - GlobalStartLocation).Size(); // The length of the journy  
+			float JournyTravelled = (Location - GlobalStartLocation).Size(); // the legnth of the travelled journy
 
-		FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
-		Location += Direction * Speed * DeltaSeconds;
-		SetActorLocation(Location);
+			if (JournyTravelled >= JournyLength)
+			{
+				//THIS IS MANUAL SWAPING WITHOUT USING THE FUNCTION
+				//FVector Swap = GlobalStartLocation;
+				//GlobalStartLocation = GlobalTargetLocation;
+				//GlobalTargetLocation = Swap;
+				Swap(GlobalStartLocation, GlobalTargetLocation);
+			}
+
+			FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
+			Location += Direction * Speed * DeltaSeconds;
+			SetActorLocation(Location);
+		}
+		else
+		{
+			// THIS CODE WILL RUN ON THE CLIENT 
+		}
 	}
-	else
+}
+
+void AMovingPlatform::AddActiveTrigger()
+{
+	ActiveTriggers++;
+}
+
+void AMovingPlatform::RemoveActiveTrigger()
+{
+	if (ActiveTriggers > 0)
 	{
-		// THIS CODE WILL RUN ON THE CLIENT 
+		ActiveTriggers--;
 	}
-	
 }
 
 
