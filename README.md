@@ -10,3 +10,7 @@ Learning the basic client server model and getting multiple instances connected 
 
 * The replication and authority -> the server is always right and Has the authority to replicate other actors , the server has the upper hand 
   upon the client, we used SetReplicates(true) and SetReplicateMovement(true) to enable it.
+
+* how NATs "Network Address Translation" work and the differences between local and global network. Connecting to two players using Hamachi by creating a new network then launch server on the this current network and launch the 
+  client on the other pcs "(ue4 path)" "(Game path)" -server -log
+  "(ue4 path)" "(Game path)" LOCAL_IP:LISTENING_PORT -game -log
