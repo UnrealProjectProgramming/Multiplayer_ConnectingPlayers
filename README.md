@@ -1,7 +1,7 @@
-# Multiplayer_ConnectingPlayers
-Connecting Players via local network in unreal engine 4
+#   Multiplayer_ConnectingPlayers
+##  Connecting Players via local network in unreal engine 4
 
-Learning the basic client server model and getting multiple instances connected through a collaborative puzzle game.
+### Learning the basic client server model and getting multiple instances connected through a collaborative puzzle game.
 
 
 * Client and Server aproach and why It is better than peer-to-peer 
@@ -14,3 +14,5 @@ Learning the basic client server model and getting multiple instances connected 
 * how NATs "Network Address Translation" work and the differences between local and global network. Connecting to two players using Hamachi by creating a new network then launch server on the this current network and launch the 
   client on the other pcs "(ue4 path)" "(Game path)" -server -log
   "(ue4 path)" "(Game path)" LOCAL_IP:LISTENING_PORT -game -log
+
+* Handling overllaping events in C++ , Using OnComponentBeginOverlap and OnComponentEndOverlap along with the two void functions OnOverlapBegin and OnOverlapEnd 
