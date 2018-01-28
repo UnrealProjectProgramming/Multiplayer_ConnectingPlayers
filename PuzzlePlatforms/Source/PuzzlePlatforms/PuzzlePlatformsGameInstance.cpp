@@ -3,7 +3,7 @@
 #include "PuzzlePlatformsGameInstance.h"
 
 #include "Engine/Engine.h"
-
+#include "Engine/EngineBaseTypes.h"
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -36,4 +36,9 @@ void UPuzzlePlatformsGameInstance::Join(FString Address)
 	UEngine* Engine = GetEngine();
 	if (!ensure(Engine != nullptr)) return;
 	Engine->AddOnScreenDebugMessage(0, 4.0f, FColor::Green, FString::Printf(TEXT("Joining : %s"), *Address));
+
+	APlayerController* PlayerController = GetFirstLocalPlayerController();
+	if (!ensure(PlayerController != nullptr)) return;
+
+	PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
 }
