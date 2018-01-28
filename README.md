@@ -15,4 +15,7 @@
   client on the other pcs "(ue4 path)" "(Game path)" -server -log
   "(ue4 path)" "(Game path)" LOCAL_IP:LISTENING_PORT -game -log
 
-* Handling overllaping events in C++ , Using OnComponentBeginOverlap and OnComponentEndOverlap along with the two void functions OnOverlapBegin and OnOverlapEnd 
+* Handling overllaping events in C++ , Using OnComponentBeginOverlap and OnComponentEndOverlap along with the two void functions OnOverlapBegin and OnOverlapEnd.
+
+* GameInstance exists in whenever I run the game, we are trying to connect using game instance and command line, difference between constructor and Init() that init fires only when the game starts and it fires
+  at every running instance of the game. We created a custome gameinstance based on the gameinstance class and overrided in the project settings by searching for GameInstance in the search bar.
