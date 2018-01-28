@@ -19,3 +19,6 @@
 
 * GameInstance exists in whenever I run the game, we are trying to connect using game instance and command line, difference between constructor and Init() that init fires only when the game starts and it fires
   at every running instance of the game. We created a custome gameinstance based on the gameinstance class and overrided in the project settings by searching for GameInstance in the search bar.
+
+* Using UEngine* Engine = GetEngine(); to add on screen debug message , we also used "Exec" in the UFUNCTION  and this allows us to use the game CMD when " ~ " pressed , The Exec is compatible in
+  (PlayerControllers, Possessed Pawns, HUDs, Cheat Managers, Game Modes, Game Instances)

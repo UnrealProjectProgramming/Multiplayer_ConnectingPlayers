@@ -19,6 +19,11 @@ public:
 	UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer);
 	virtual void Init() override;
 
+	UFUNCTION(Exec)
+	void Host();
 	
-	
+	UFUNCTION(Exec)
+	void Join(FString Address);
+
+
 };
