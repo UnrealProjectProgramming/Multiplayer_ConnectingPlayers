@@ -21,6 +21,14 @@ void UPuzzlePlatformsGameInstance::Host()
 	UEngine* Engine = GetEngine();
 	if (!ensure(Engine != nullptr)) return;
 	Engine->AddOnScreenDebugMessage(0, 4.0f, FColor::Green, TEXT("Hosting"));
+
+	// Hosting the server with Server travel
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen"); // It is very important to put"?listen" so that the server will be ready for players
+																				   // to connect to it via command line like we did in the prev lectuers.
+
 }
 
 void UPuzzlePlatformsGameInstance::Join(FString Address)

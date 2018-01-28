@@ -22,3 +22,5 @@
 
 * Using UEngine* Engine = GetEngine(); to add on screen debug message , we also used "Exec" in the UFUNCTION  and this allows us to use the game CMD when " ~ " pressed , The Exec is compatible in
   (PlayerControllers, Possessed Pawns, HUDs, Cheat Managers, Game Modes, Game Instances)
+
+* Hosting the server with the server travel in the GetWorld member, the playercontroller connects to a map(lobby) then when the command Host is fired, it fires ServerTravel and takes the player from first map to the 2nd one and Host  a server so that clients can start connecting to this server.
