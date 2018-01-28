@@ -24,3 +24,10 @@
   (PlayerControllers, Possessed Pawns, HUDs, Cheat Managers, Game Modes, Game Instances)
 
 * Hosting the server with the server travel in the GetWorld member, the playercontroller connects to a map(lobby) then when the command Host is fired, it fires ServerTravel and takes the player from first map to the 2nd one and Host  a server so that clients can start connecting to this server.
+
+## How to connect: 1- Each player must have a copy the final built game
+				   2- both players must connect via Hamachi 
+				   3- after that the players open the game and press "`" and connect to the Local Host IP
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+## Starting to create an advanced user interface MainMenu to make it easier for players to connect without the need of using in game command line.  
