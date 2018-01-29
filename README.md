@@ -33,3 +33,5 @@ ________________________________________________________________________________
 ## Starting to create an advanced user interface MainMenu to make it easier for players to connect without the need of using in game command line.  
 
 * Getting a reference to a BP Class using FClassFinder and including "UMG" in the Build.CS script to use U.I Functionality.
+
+* creating a LoadMenu function in C++ which is BlueprintCallable , in this function we used CreateWidget (instance, UCLass)  and added the created widget to viewpot, then Used the LoadMenu Func to call it from level blueprint in BeginPlay. 
