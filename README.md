@@ -25,7 +25,7 @@
 
 * Hosting the server with the server travel in the GetWorld member, the playercontroller connects to a map(lobby) then when the command Host is fired, it fires ServerTravel and takes the player from first map to the 2nd one and Host  a server so that clients can start connecting to this server.
 
-## How to connect: 1- Each player must have a copy the final built game
+# How to connect: 1- Each player must have a copy the final built game
 				   2- both players must connect via Hamachi 
 				   3- after that the players open the game and press "`" and connect to the Local Host IP
 __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
@@ -37,3 +37,5 @@ ________________________________________________________________________________
 * creating a LoadMenu function in C++ which is BlueprintCallable , in this function we used CreateWidget (instance, UCLass)  and added the created widget to viewpot, then Used the LoadMenu Func to call it from level blueprint in BeginPlay. 
 
 * we changed the UI input mode using APlayerController Function with the name SetInputMode, SetInputMode takes FInputMode as an Arguement m and we constructed FInputModeUIOnly SetWidgetToFocus and SetLockMouseToViewPortBehaviour and then we passed it to SetInputMode and made the cursor visiable.
+
+* Making Advanced UI layoyt by using vertical and horizontal boxes as well as Size boxes and learning about Overlaying.
