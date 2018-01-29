@@ -31,3 +31,5 @@
 __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ## Starting to create an advanced user interface MainMenu to make it easier for players to connect without the need of using in game command line.  
+
+* Getting a reference to a BP Class using FClassFinder and including "UMG" in the Build.CS script to use U.I Functionality.
