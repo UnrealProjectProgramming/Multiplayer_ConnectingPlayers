@@ -3,14 +3,30 @@
 #include "MainMenu.h"
 
 #include "Components/Button.h"
+#include "PuzzlePlatformsGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
-void UMainMenu::NativeConstruct()
+
+bool UMainMenu::Initialize()
 {
-	Super::NativeConstruct();
+	bool Success = Super::Initialize();
+	if (!Success) return false;
+	
+	if (!ensure(HostButton != nullptr)) return false;
 
-	if (!ensure(Host != nullptr)) return;
-	if (!ensure(Join != nullptr)) return;
 
+	HostButton->OnClicked.AddDynamic(this, &UMainMenu::HostServer);
+	
+
+	return true;
 
 }
 
+void UMainMenu::HostServer()
+{
+	/*UPuzzlePlatformsGameInstance* GameInstance = Cast<UPuzzlePlatformsGameInstance>(UGameplayStatics::GetGameInstance(this));
+	if (!ensure(GameInstance != nullptr)) return ;
+	GameInstance->Host();*/
+
+	UE_LOG(LogTemp, Warning, TEXT("I am Gonna host a server"));
+}

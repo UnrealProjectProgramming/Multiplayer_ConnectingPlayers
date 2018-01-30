@@ -41,3 +41,5 @@ ________________________________________________________________________________
 * Making Advanced UI layoyt by using vertical and horizontal boxes as well as Size boxes and learning about Overlaying.
 
 * connecting UMG with C++ "Binding" http://benhumphreys.co.uk/unreal/ui-bindwidget/    https://docs.unrealengine.com/latest/INT/API/Runtime/UMG/Components/UButton/
+
+* using UButton callback (OnClick) to AddDynamic event so we can be able to connect with Host function in the PuzzlePlatformGameInstance.

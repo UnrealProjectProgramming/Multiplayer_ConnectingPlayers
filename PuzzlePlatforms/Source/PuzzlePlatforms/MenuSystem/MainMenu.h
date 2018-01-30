@@ -14,14 +14,17 @@ class PUZZLEPLATFORMS_API UMainMenu : public UUserWidget
 {
 	GENERATED_BODY()
 
-public:
-	virtual void NativeConstruct() override;
+protected:
+	virtual bool Initialize() override;
 
+private:
 	UPROPERTY(meta = (BindWidget))
-	class UButton* Host;
+	class UButton* HostButton;
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* Join;
 	
+	UFUNCTION()
+	void HostServer();
 	
 };
