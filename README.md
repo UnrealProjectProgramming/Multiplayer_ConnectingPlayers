@@ -45,3 +45,5 @@ ________________________________________________________________________________
 * using UButton callback (OnClick) to AddDynamic event so we can be able to connect with Host function in the PuzzlePlatformGameInstance.
 
 * implementing Unreal interface and making sure not to cause the Diamond inheritance problem https://medium.freecodecamp.org/multiple-inheritance-in-c-and-the-diamond-problem-7c12a9ddbbec  , so that we make the MenuSystem independant as it will call the interface and the GameInstance will call the interface as well , so the Host func can be called from the MainMenu class to the interface then to its way to the GameInstance Class.
+
+* Creating Sub Menu for join a server and styling it , and adding a switcher to switch between menu systems.
