@@ -39,3 +39,5 @@ ________________________________________________________________________________
 * we changed the UI input mode using APlayerController Function with the name SetInputMode, SetInputMode takes FInputMode as an Arguement m and we constructed FInputModeUIOnly SetWidgetToFocus and SetLockMouseToViewPortBehaviour and then we passed it to SetInputMode and made the cursor visiable.
 
 * Making Advanced UI layoyt by using vertical and horizontal boxes as well as Size boxes and learning about Overlaying.
+
+* connecting UMG with C++ "Binding" http://benhumphreys.co.uk/unreal/ui-bindwidget/    https://docs.unrealengine.com/latest/INT/API/Runtime/UMG/Components/UButton/
