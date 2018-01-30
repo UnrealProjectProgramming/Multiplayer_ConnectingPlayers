@@ -3,7 +3,6 @@
 #include "MainMenu.h"
 
 #include "Components/Button.h"
-#include "PuzzlePlatformsGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -24,9 +23,8 @@ bool UMainMenu::Initialize()
 
 void UMainMenu::HostServer()
 {
-	/*UPuzzlePlatformsGameInstance* GameInstance = Cast<UPuzzlePlatformsGameInstance>(UGameplayStatics::GetGameInstance(this));
-	if (!ensure(GameInstance != nullptr)) return ;
-	GameInstance->Host();*/
-
-	UE_LOG(LogTemp, Warning, TEXT("I am Gonna host a server"));
+	if (MenuInterface)
+	{
+		MenuInterface->Host();
+	}
 }
