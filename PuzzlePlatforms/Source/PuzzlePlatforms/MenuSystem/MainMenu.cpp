@@ -4,6 +4,7 @@
 
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
+#include "Components/EditableTextBox.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -20,6 +21,9 @@ bool UMainMenu::Initialize()
 
 	if (!ensure(CancelButton != nullptr)) return false;
 	CancelButton->OnClicked.AddDynamic(this, &UMainMenu::ReturnToMainMenu);
+	
+	if (!ensure(ConfirmJoinServerButton != nullptr)) return false;
+	ConfirmJoinServerButton->OnClicked.AddDynamic(this, &UMainMenu::JoinServer);
 	
 
 	return true;
@@ -85,4 +89,14 @@ void UMainMenu::ReturnToMainMenu()
 	if (!ensure(MainMenu != nullptr)) return;
 
 	MenuSwitcher->SetActiveWidget(MainMenu);
+}
+
+void UMainMenu::JoinServer()
+{
+	if (!ensure(IPAddressField != nullptr)) return;
+	if (MenuInterface != nullptr)
+	{
+		FText Address = IPAddressField->GetText();
+		MenuInterface->Join(Address.ToString());
+	}
 }
