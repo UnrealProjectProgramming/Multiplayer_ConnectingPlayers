@@ -29,10 +29,13 @@ public:
 	void LoadPauseMenu();
 
 	UFUNCTION(Exec)
-	void Host();
+	void Host() override;
 	
 	UFUNCTION(Exec)
-	void Join(FString Address);
+	void Join(FString Address) override;
+
+	virtual void LoadMainMenu() override;
+
 
 private:
 	TSubclassOf<class UUserWidget> MenuClass;
@@ -40,7 +43,6 @@ private:
 	class UMainMenu* Menu;
 	
 	TSubclassOf<class UUserWidget> InGameMenuClass;
-
 
 
 };
