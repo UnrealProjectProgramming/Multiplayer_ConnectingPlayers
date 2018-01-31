@@ -49,3 +49,5 @@ ________________________________________________________________________________
 * Creating Sub Menu for join a server and styling it , and adding a switcher to switch between menu systems.
 
 * Navigating Menus in C++ by creating a menu switcher in the UI then bind it to the c++ by using Meta = BindWidget in UPROPERTY after that we Bind the action by creating a function then AddDynamic in the UMainMenu::Initialize. and the the created function we use WidgetSwitcher->SetActiveWidget and pass to it the Widget that we want to navigate to whether the MainMenu or the joinMenu  https://docs.unrealengine.com/latest/INT/API/Runtime/UMG/Components/UWidgetSwitcher/index.html
+
+## Finishing Section two and full creating the MainMenu and ready to advance and add more on it.
