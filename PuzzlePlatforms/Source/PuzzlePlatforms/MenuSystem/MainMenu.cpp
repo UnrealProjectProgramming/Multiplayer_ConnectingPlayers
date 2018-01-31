@@ -7,7 +7,6 @@
 #include "Components/EditableTextBox.h"
 #include "Kismet/GameplayStatics.h"
 
-
 bool UMainMenu::Initialize()
 {
 	bool Success = Super::Initialize();
@@ -24,46 +23,7 @@ bool UMainMenu::Initialize()
 	
 	if (!ensure(ConfirmJoinServerButton != nullptr)) return false;
 	ConfirmJoinServerButton->OnClicked.AddDynamic(this, &UMainMenu::JoinServer);
-	
-
 	return true;
-
-}
-
-void UMainMenu::SetMenuInterface(IMenuInterface* MenuInterfaceToSet)
-{
-	MenuInterface = MenuInterfaceToSet;
-}
-
-void UMainMenu::Setup()
-{
-	this->AddToViewport();
-	//GetFirstLocalPlayerController();
-	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
-	if (!ensure(PlayerController != nullptr)) return;
-
-	FInputModeUIOnly InputModeData;
-	InputModeData.SetWidgetToFocus(this->TakeWidget());
-	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-
-	PlayerController->SetInputMode(InputModeData);
-	PlayerController->bShowMouseCursor = true;
-
-}
-
-void UMainMenu::Teardown()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Tearing Down"));
-	this->RemoveFromViewport();
-
-	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
-	if (!ensure(PlayerController != nullptr)) return;
-
-
-	FInputModeGameOnly InputModeData;
-	
-	PlayerController->SetInputMode(InputModeData);
-	PlayerController->bShowMouseCursor = false;
 }
 
 void UMainMenu::HostServer()
