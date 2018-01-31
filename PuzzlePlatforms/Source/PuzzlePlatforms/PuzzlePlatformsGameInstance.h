@@ -36,6 +36,7 @@ public:
 
 	virtual void LoadMainMenu() override;
 
+	virtual void ExitGame() override;
 
 private:
 	TSubclassOf<class UUserWidget> MenuClass;

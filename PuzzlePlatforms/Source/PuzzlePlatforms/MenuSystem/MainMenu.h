@@ -32,6 +32,9 @@ private:
 	class UButton* ConfirmJoinServerButton;
 
 	UPROPERTY(meta = (BindWidget))
+	class UButton* QuitButton;
+
+	UPROPERTY(meta = (BindWidget))
 	class UEditableTextBox* IPAddressField;
 
 	UPROPERTY(meta = (BindWidget))
@@ -55,5 +58,8 @@ private:
 	
 	UFUNCTION()
 	void JoinServer();
+
+	UFUNCTION()
+	void QuitClicked();
 
 };
