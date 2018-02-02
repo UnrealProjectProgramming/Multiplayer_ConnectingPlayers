@@ -53,3 +53,16 @@ ________________________________________________________________________________
 ## Finishing Section two and full creating the MainMenu and ready to advance and add more on it.
 
 * Game tested and everything working fine.
+
+________________________________________________________________________________________________________________________
+
+# Multiplayer_Steam
+## Using Steam SDK and UnrealEngine 4 online Sub-System to make a multiplayer functionality ##
+
+* Getting steam SDK
+
+* Fixing Direct3D common error " S1023 " and updating & connecting the SteamworksExample.sln to D3dx to run steam game example " space war " and have access to use steam features such as seeing friends ,  voice chat , server and lobby and even making steam achievments.
+
+* Connecting to friends over steam Spacewar , Online and localy.
+
+* IOnlineSubsystem  https://docs.unrealengine.com/latest/INT/Programming/Online/

@@ -11,6 +11,7 @@
 #include "PlatformTrigger.h"
 #include "MenuSystem/MainMenu.h"
 #include "MenuSystem/MenuWidget.h"
+#include "OnlineSubsystem.h"
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -28,10 +29,13 @@ void UPuzzlePlatformsGameInstance::Init()
 {
 	Super::Init();
 
-	UE_LOG(LogTemp, Warning, TEXT("Found CLass: %s"), *MenuClass->GetName());
+	IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
+	if (!ensure(Subsystem != nullptr)) return;
+	UE_LOG(LogTemp, Warning, TEXT("Found CLass: %s"), *Subsystem->GetSubsystemName().ToString());
+
 }
 
-void UPuzzlePlatformsGameInstance::LoadMenu()
+void UPuzzlePlatformsGameInstance::LoadMenuWidget()
 {
 	if (!ensure(MenuClass != nullptr)) return;
 	Menu = CreateWidget<UMainMenu>(this, MenuClass);
