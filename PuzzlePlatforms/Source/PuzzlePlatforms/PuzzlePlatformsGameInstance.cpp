@@ -36,6 +36,7 @@ void UPuzzlePlatformsGameInstance::Init()
 	if (SessionInterface.IsValid())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found Seassion Interface"));
+		
 	}
 
 }

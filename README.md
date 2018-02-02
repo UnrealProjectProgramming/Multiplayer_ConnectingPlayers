@@ -66,3 +66,5 @@ ________________________________________________________________________________
 * Connecting to friends over steam Spacewar , Online and localy.
 
 * IOnlineSubsystem  https://docs.unrealengine.com/latest/INT/Programming/Online/
+
+* Memory management in C++ Ue4 ( Reference counting and garabage collecting) https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/SmartPointerLibrary/  https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Objects/Optimizations/
