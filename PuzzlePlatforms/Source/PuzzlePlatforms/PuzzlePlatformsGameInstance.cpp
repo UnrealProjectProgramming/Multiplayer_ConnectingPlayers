@@ -46,6 +46,8 @@ void UPuzzlePlatformsGameInstance::Init()
 		if (SessionSearch.IsValid())
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Starting Finding Session"));
+			SessionSearch->bIsLanQuery = true; //Whether the query is intended for LAN matches or not
+			
 			SessionInterface->FindSessions(0, SessionSearch.ToSharedRef());
 		}
 	}
@@ -113,9 +115,14 @@ void UPuzzlePlatformsGameInstance::OnDestroySessionComplete(FName SessionName, b
 
 void UPuzzlePlatformsGameInstance::OnFindSessionsComplete(bool Success)
 {
-	if (Success)
+	if (Success && SessionSearch.IsValid())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found all Sessions."));
+		TArray<FOnlineSessionSearchResult> SearchResults = SessionSearch->SearchResults;
+		for (const FOnlineSessionSearchResult& SearchResult : SearchResults)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Found Session Name/s : %s"), *SearchResult.GetSessionIdStr());
+		}
 	}
 }
 
@@ -124,6 +131,10 @@ void UPuzzlePlatformsGameInstance::CreateSession()
 	if (SessionInterface.IsValid())
 	{
 		FOnlineSessionSettings SessionSettings;
+		SessionSettings.bIsLANMatch = true; //  This game will be lan only and not be visible to external players
+		SessionSettings.NumPublicConnections = 2; // The number of publicly available connections advertised
+		SessionSettings.bShouldAdvertise = true; // Whether this match is publicly advertised on the online service
+
 		SessionInterface->CreateSession(0, SESSION_NAME, SessionSettings);
 	}
 }
