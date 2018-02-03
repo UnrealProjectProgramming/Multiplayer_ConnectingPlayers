@@ -29,7 +29,6 @@ void UMenuWidget::Setup()
 
 void UMenuWidget::Teardown()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Tearing Down"));
 	this->RemoveFromViewport();
 
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);

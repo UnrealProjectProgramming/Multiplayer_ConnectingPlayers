@@ -11,7 +11,8 @@
 #include "PlatformTrigger.h"
 #include "MenuSystem/MainMenu.h"
 #include "MenuSystem/MenuWidget.h"
-#include "OnlineSubsystem.h"
+#include "OnlineSessionSettings.h"
+#include "OnlineSessionInterface.h"
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -31,12 +32,13 @@ void UPuzzlePlatformsGameInstance::Init()
 
 	IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
 	if (!ensure(Subsystem != nullptr)) return;
-	UE_LOG(LogTemp, Warning, TEXT("Found CLass: %s"), *Subsystem->GetSubsystemName().ToString());
-	IOnlineSessionPtr SessionInterface = Subsystem->GetSessionInterface();
+	//UE_LOG(LogTemp, Warning, TEXT("Found Class: %s"), *Subsystem->GetSubsystemName().ToString());
+	SessionInterface = Subsystem->GetSessionInterface();
+
 	if (SessionInterface.IsValid())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found Seassion Interface"));
-		
+		SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UPuzzlePlatformsGameInstance::OnCreateSessionComplete);
 	}
 
 }
@@ -50,8 +52,23 @@ void UPuzzlePlatformsGameInstance::LoadMenuWidget()
 	Menu->SetMenuInterface(this);
 }
 
+
+
 void UPuzzlePlatformsGameInstance::Host()
-{	
+{
+	if (SessionInterface.IsValid())
+	{
+		FOnlineSessionSettings SessionSettings;
+		SessionInterface->CreateSession(0, TEXT("MyGameSession"), SessionSettings);
+	}
+}
+void UPuzzlePlatformsGameInstance::OnCreateSessionComplete(FName SessionName, bool Success)
+{
+	if (!Success)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Couldn't create sesssion"));
+		return;
+	}
 	if (Menu != nullptr)
 	{
 		Menu->Teardown();
@@ -66,7 +83,7 @@ void UPuzzlePlatformsGameInstance::Host()
 	if (!ensure(World != nullptr)) return;
 
 	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen"); // It is very important to put"?listen" so that the server will be ready for players
-																				   // to connect to it via command line like we did in the prev lectuers.
+																				   // to connect to it via command line like we did in the prev lectuers
 }
 
 void UPuzzlePlatformsGameInstance::Join(FString Address)
@@ -111,3 +128,5 @@ void UPuzzlePlatformsGameInstance::ExitGame()
 	const FString& QuitCommand = "quit";
 	PlayerController->ConsoleCommand(QuitCommand);
 }
+
+

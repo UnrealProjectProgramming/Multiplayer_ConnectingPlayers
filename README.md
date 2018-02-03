@@ -68,3 +68,7 @@ ________________________________________________________________________________
 * IOnlineSubsystem  https://docs.unrealengine.com/latest/INT/Programming/Online/
 
 * Memory management in C++ Ue4 ( Reference counting and garabage collecting) https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/SmartPointerLibrary/  https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Objects/Optimizations/
+
+* creating session and using OnCreateSessionCompletedDelegate https://docs.unrealengine.com/latest/INT/Programming/Online/Interfaces/Session/index.html#matchmaking-findingsessions
+ https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Delegates/Multicast/
+ https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/index.html

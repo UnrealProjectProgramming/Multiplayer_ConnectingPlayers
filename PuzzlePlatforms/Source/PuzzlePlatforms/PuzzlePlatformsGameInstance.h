@@ -6,6 +6,8 @@
 #include "Engine/GameInstance.h"
 
 #include "MenuSystem/MenuInterface.h"
+#include "OnlineSubsystem.h"
+
 
 #include "PuzzlePlatformsGameInstance.generated.h"
 
@@ -45,5 +47,7 @@ private:
 	
 	TSubclassOf<class UUserWidget> InGameMenuClass;
 
+	void OnCreateSessionComplete(FName SessionName, bool Success);
 
+	IOnlineSessionPtr SessionInterface; // we can't forward declear this bvecause it will need a pointer and it is interface.
 };
