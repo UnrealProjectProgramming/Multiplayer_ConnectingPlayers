@@ -49,5 +49,8 @@ private:
 
 	void OnCreateSessionComplete(FName SessionName, bool Success);
 
+	void OnDestroySessionComplete(FName SessionName, bool Success);
+
+	void CreateSession();
 	IOnlineSessionPtr SessionInterface; // we can't forward declear this bvecause it will need a pointer and it is interface.
 };
