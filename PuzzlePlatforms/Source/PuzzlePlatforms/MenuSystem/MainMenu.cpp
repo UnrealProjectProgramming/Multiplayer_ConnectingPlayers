@@ -6,6 +6,19 @@
 #include "Components/WidgetSwitcher.h"
 #include "Components/EditableTextBox.h"
 #include "Kismet/GameplayStatics.h"
+#include "UObject/ConstructorHelpers.h"
+#include "ServerRow.h"
+#include "Components/Widget.h"
+
+
+UMainMenu::UMainMenu(const FObjectInitializer & ObjectInitializer)
+{
+	ConstructorHelpers::FClassFinder<UUserWidget> ServerRowBPClass(TEXT("/Game/MainMenu/WBP_ServerRow"));
+	if (!ensure(ServerRowBPClass.Class != nullptr)) return; //Pointer to a class object that we can later use to instanciate other objects 
+	ServerRowClass = ServerRowBPClass.Class;
+
+
+}
 
 bool UMainMenu::Initialize()
 {
@@ -57,11 +70,21 @@ void UMainMenu::ReturnToMainMenu()
 
 void UMainMenu::JoinServer()
 {
-	if (!ensure(IPAddressField != nullptr)) return;
 	if (MenuInterface != nullptr)
 	{
+		/*if (!ensure(IPAddressField != nullptr)) return;
 		FText Address = IPAddressField->GetText();
-		MenuInterface->Join(Address.ToString());
+		MenuInterface->Join(Address.ToString());*/
+
+		UWorld* World = this->GetWorld();
+
+		if (!ensure(World != nullptr)) return;
+		if (!ensure( ServerRowClass != nullptr)) return;
+
+		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
+		if (!ensure(Row != nullptr)) return;
+
+		ServerList->AddChild(Row);
 	}
 }
 

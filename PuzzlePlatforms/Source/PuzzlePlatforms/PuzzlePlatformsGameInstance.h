@@ -21,6 +21,7 @@ class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance, p
 	
 public:
 
+
 	UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer);
 	void Init();
 
@@ -46,6 +47,8 @@ private:
 	class UMainMenu* Menu;
 	
 	TSubclassOf<class UUserWidget> InGameMenuClass;
+
+
 
 	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
 
