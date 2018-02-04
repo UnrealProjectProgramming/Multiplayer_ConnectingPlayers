@@ -9,6 +9,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "ServerRow.h"
 #include "Components/Widget.h"
+#include "Components/TextBlock.h"
 
 
 UMainMenu::UMainMenu(const FObjectInitializer & ObjectInitializer)
@@ -57,6 +58,10 @@ void UMainMenu::OpenJoinMenu()
 	if (!ensure(JoinMenu != nullptr)) return;
 
 	MenuSwitcher->SetActiveWidget(JoinMenu);
+	if (MenuInterface != nullptr)
+	{
+		MenuInterface->RefreshingServerList();
+	}
 
 }
 
@@ -72,18 +77,23 @@ void UMainMenu::JoinServer()
 {
 	if (MenuInterface != nullptr)
 	{
-		/*if (!ensure(IPAddressField != nullptr)) return;
-		FText Address = IPAddressField->GetText();
-		MenuInterface->Join(Address.ToString());*/
+		//if (!ensure(IPAddressField != nullptr)) return;
+		//FText Address = IPAddressField->GetText();
+		MenuInterface->Join("");
+	}
+}
 
-		UWorld* World = this->GetWorld();
-
-		if (!ensure(World != nullptr)) return;
-		if (!ensure( ServerRowClass != nullptr)) return;
-
+void UMainMenu::SetServerList(TArray<FString> ServerNames)
+{
+	UWorld* World = this->GetWorld();
+	if (!ensure(World != nullptr)) return;
+	ServerList->ClearChildren();
+	for (const FString& ServerName : ServerNames)
+	{
+		if (!ensure(ServerRowClass != nullptr)) return;
 		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
 		if (!ensure(Row != nullptr)) return;
-
+		Row->ServerName->SetText(FText::FromString(ServerName));
 		ServerList->AddChild(Row);
 	}
 }

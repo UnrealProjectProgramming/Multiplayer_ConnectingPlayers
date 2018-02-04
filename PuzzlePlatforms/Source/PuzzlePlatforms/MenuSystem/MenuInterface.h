@@ -28,4 +28,5 @@ public:
 	virtual void Join(FString Address) = 0; // Both methods are virtual because we want them to be implemente by sub-classes and in our case it is the game instance.
 	virtual void LoadMainMenu() = 0;
 	virtual void ExitGame() = 0;
+	virtual void RefreshingServerList() = 0;
 };
