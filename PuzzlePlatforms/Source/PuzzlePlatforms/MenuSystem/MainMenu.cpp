@@ -63,7 +63,6 @@ void UMainMenu::OpenJoinMenu()
 	{
 		MenuInterface->RefreshingServerList();
 	}
-
 }
 
 void UMainMenu::ReturnToMainMenu()
@@ -80,17 +79,11 @@ void UMainMenu::JoinServer()
 	if (SelectedIndex.IsSet())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Selected Index = %d"), SelectedIndex.GetValue());
+		MenuInterface->Join(SelectedIndex.GetValue());
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Selected Index not set"));
-
-	}
-	if (MenuInterface != nullptr)
-	{
-		//if (!ensure(IPAddressField != nullptr)) return;
-		//FText Address = IPAddressField->GetText();
-		MenuInterface->Join("");
 	}
 }
 

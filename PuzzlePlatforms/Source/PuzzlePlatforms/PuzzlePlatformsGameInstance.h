@@ -7,6 +7,7 @@
 
 #include "MenuSystem/MenuInterface.h"
 #include "OnlineSubsystem.h"
+#include "OnlineSessionInterface.h"
 
 
 #include "PuzzlePlatformsGameInstance.generated.h"
@@ -35,7 +36,7 @@ public:
 	void Host() override;
 	
 	UFUNCTION(Exec)
-	void Join(FString Address) override;
+	void Join(uint32 Index) override;
 
 	virtual void LoadMainMenu() override;
 
@@ -45,20 +46,15 @@ public:
 
 private:
 	TSubclassOf<class UUserWidget> MenuClass;
-
-	class UMainMenu* Menu;
-	
 	TSubclassOf<class UUserWidget> InGameMenuClass;
-
-
-
 	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
+	class UMainMenu* Menu;
+	IOnlineSessionPtr SessionInterface; // we can't forward declear this bvecause it will need a pointer and it is interface.
+
 
 	void OnCreateSessionComplete(FName SessionName, bool Success);
-
 	void OnDestroySessionComplete(FName SessionName, bool Success);
-
 	void OnFindSessionsComplete(bool Success);
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Results);
 	void CreateSession();
-	IOnlineSessionPtr SessionInterface; // we can't forward declear this bvecause it will need a pointer and it is interface.
 };

@@ -72,3 +72,11 @@ ________________________________________________________________________________
 * creating session and using OnCreateSessionCompletedDelegate https://docs.unrealengine.com/latest/INT/Programming/Online/Interfaces/Session/index.html#matchmaking-findingsessions
  https://docs.unrealengine.com/latest/INT/Programming/UnrealArchitecture/Delegates/Multicast/
  https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/index.html
+
+
+* Joining A Session , using SessionInterface->JoinSession to join a session passing to it player index and session name and the searchresults at a current Index, after that we call OnJoinSessionCompleteDelegate and pass to it the function that it wants which is OnJoinSessionComplete whichs takes two params , the Servername and EOnJoinSessionCompleteResult::Type after that we go to the the OnSessionComplete and we implement it , we first  pass an out FString Address to SessionInterface->GetResolvedConnectString and we check if it fails we return otherwise , we find the world and the player controller and make a client travel using the Out Address that we recived from GerResolved ConnectString. 
+Check These Links if needed.
+https://docs.unrealengine.com/latest/INT/Programming/Online/Interfaces/Session/index.html
+https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/JoinSession/1/index.html
+https://docs.unrealengine.com/latest//INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/GetResolvedConnectString/1/index.html
+https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/FOnJoinSessionComplete/index.html
