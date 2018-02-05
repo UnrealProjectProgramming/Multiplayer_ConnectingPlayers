@@ -80,3 +80,6 @@ https://docs.unrealengine.com/latest/INT/Programming/Online/Interfaces/Session/i
 https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/JoinSession/1/index.html
 https://docs.unrealengine.com/latest//INT/API/Plugins/OnlineSubsystem/Interfaces/IOnlineSession/GetResolvedConnectString/1/index.html
 https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/FOnJoinSessionComplete/index.html
+
+* Enabling Steam Online Subsystem , we first need to go and include it in the Build.cs OnlineSubsystemSteam" then we  change the Engine.ini using what is in this documentation.
+	https://docs.unrealengine.com/latest/INT/Programming/Online/Steam/    check out at the end of the page ( the End Results ).
