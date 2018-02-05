@@ -18,5 +18,20 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* ServerName;
 	
-	
+
+	void Setup(class UMainMenu* InParent, uint32 InIndex);
+
+
+private:
+	UFUNCTION()
+	void OnClicked();
+
+	uint32 Index;
+
+	UPROPERTY()
+	class UMainMenu* Parent;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* SelectServerButton;
+
 };

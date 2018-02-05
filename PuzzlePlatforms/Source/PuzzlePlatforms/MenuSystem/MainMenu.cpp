@@ -41,6 +41,7 @@ bool UMainMenu::Initialize()
 	if (!ensure(QuitButton != nullptr)) return false;
 	QuitButton->OnClicked.AddDynamic(this, &UMainMenu::QuitClicked);
 
+
 	return true;
 }
 
@@ -75,6 +76,16 @@ void UMainMenu::ReturnToMainMenu()
 
 void UMainMenu::JoinServer()
 {
+
+	if (SelectedIndex.IsSet())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Selected Index = %d"), SelectedIndex.GetValue());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Selected Index not set"));
+
+	}
 	if (MenuInterface != nullptr)
 	{
 		//if (!ensure(IPAddressField != nullptr)) return;
@@ -83,20 +94,33 @@ void UMainMenu::JoinServer()
 	}
 }
 
+void UMainMenu::SelectIndex(uint32 Index)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Seting Index : num "));
+	SelectedIndex = Index;
+}
+
+
 void UMainMenu::SetServerList(TArray<FString> ServerNames)
 {
 	UWorld* World = this->GetWorld();
 	if (!ensure(World != nullptr)) return;
 	ServerList->ClearChildren();
+
+	uint32 i = 0;
+
 	for (const FString& ServerName : ServerNames)
 	{
 		if (!ensure(ServerRowClass != nullptr)) return;
 		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
 		if (!ensure(Row != nullptr)) return;
 		Row->ServerName->SetText(FText::FromString(ServerName));
+		Row->Setup(this, i);
+		i++;
 		ServerList->AddChild(Row);
 	}
 }
+
 
 void UMainMenu::QuitClicked()
 {
