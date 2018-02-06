@@ -118,8 +118,9 @@ void UPuzzlePlatformsGameInstance::OnFindSessionsComplete(bool Success)
 			UE_LOG(LogTemp, Warning, TEXT("Found Session Name/s : %s"), *SearchResult.GetSessionIdStr());
 			FServerData Data;
 			Data.Name = SearchResult.GetSessionIdStr();
-			Data.CurrentPlayers = SearchResult.Session.NumOpenPublicConnections; // number of current players
 			Data.MaxPlayers = SearchResult.Session.SessionSettings.NumPublicConnections; // the number of max players
+		    // without Data.MaxPlayers being subtracted , NumOpenPublicConnections returnrs the number of current avaliable slots 
+			Data.CurrentPlayers = Data.MaxPlayers - SearchResult.Session.NumOpenPublicConnections; 
 			Data.HostUsername = SearchResult.Session.OwningUserName; // TODO get pings  in ms
 			ServerNames.Add(Data);
 		}
