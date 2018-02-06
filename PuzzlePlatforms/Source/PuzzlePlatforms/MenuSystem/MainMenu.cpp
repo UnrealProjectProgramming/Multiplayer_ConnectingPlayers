@@ -89,8 +89,8 @@ void UMainMenu::JoinServer()
 
 void UMainMenu::SelectIndex(uint32 Index)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Seting Index : num "));
 	SelectedIndex = Index;
+	UpdateChildren();
 }
 
 
@@ -120,5 +120,18 @@ void UMainMenu::QuitClicked()
 	if (MenuInterface != nullptr)
 	{
 		MenuInterface->ExitGame();
+	}
+}
+
+void UMainMenu::UpdateChildren()
+{
+	if (!ensure(ServerList != nullptr)) return;
+	int32 NumOfChildren = ServerList->GetChildrenCount();
+	for (int32 i = 0; NumOfChildren > i; ++i)
+	{
+		auto Row = Cast<UServerRow>(ServerList->GetChildAt(i)); 
+		if (!ensure(Row != nullptr)) return;
+		Row->Selected = (SelectedIndex.IsSet() && SelectedIndex.GetValue() == i); // Using the short circuit and.
+
 	}
 }

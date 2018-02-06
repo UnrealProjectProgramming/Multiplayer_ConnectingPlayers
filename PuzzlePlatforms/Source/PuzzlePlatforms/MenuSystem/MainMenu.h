@@ -74,6 +74,8 @@ private:
 	void QuitClicked();
 
 
+	void UpdateChildren();
+
 	TOptional<uint32> SelectedIndex;
 
 
