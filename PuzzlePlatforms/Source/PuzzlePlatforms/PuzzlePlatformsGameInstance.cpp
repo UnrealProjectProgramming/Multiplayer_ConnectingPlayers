@@ -111,16 +111,17 @@ void UPuzzlePlatformsGameInstance::OnFindSessionsComplete(bool Success)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found all Sessions."));
 		TArray<FOnlineSessionSearchResult> SearchResults = SessionSearch->SearchResults;
-		TArray<FString> ServerNames;
-		// TODO : remove the Adds later.
-		ServerNames.Add("Test Server 1");
-		ServerNames.Add("Test Server 2");
-		ServerNames.Add("Test Server 3");
+		TArray<FServerData> ServerNames;
 
 		for (const FOnlineSessionSearchResult& SearchResult : SearchResults)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Found Session Name/s : %s"), *SearchResult.GetSessionIdStr());
-			ServerNames.Add(SearchResult.GetSessionIdStr());
+			FServerData Data;
+			Data.Name = SearchResult.GetSessionIdStr();
+			Data.CurrentPlayers = SearchResult.Session.NumOpenPublicConnections; // number of current players
+			Data.MaxPlayers = SearchResult.Session.SessionSettings.NumPublicConnections; // the number of max players
+			Data.HostUsername = SearchResult.Session.OwningUserName; // TODO get pings  in ms
+			ServerNames.Add(Data);
 		}
 
 		Menu->SetServerList(ServerNames);
@@ -153,7 +154,15 @@ void UPuzzlePlatformsGameInstance::CreateSession()
 	if (SessionInterface.IsValid())
 	{
 		FOnlineSessionSettings SessionSettings;
-		SessionSettings.bIsLANMatch = false; //  This game will be lan only and not be visible to external players
+		if (IOnlineSubsystem::Get()->GetSubsystemName() == "NULL")
+		{
+			SessionSettings.bIsLANMatch = true; //  This game will be lan only and not be visible to external players
+			// Make sure to type -nosteam when launching from Powershell or CMD 
+		}
+		else
+		{
+			SessionSettings.bIsLANMatch = false; 
+		}		
 		SessionSettings.NumPublicConnections = 2; // The number of publicly available connections advertised
 		SessionSettings.bShouldAdvertise = true; // Whether this match is publicly advertised on the online service
 		SessionSettings.bUsesPresence = true; //Whether to display user presence information or not	
