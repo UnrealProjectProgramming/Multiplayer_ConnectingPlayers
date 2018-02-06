@@ -24,7 +24,7 @@ public:
 	//virtual void Host() = 0;
 	//classes using this interface must implement ReactToHighNoon
 
-	virtual void Host() = 0;  // Equal zero ( = 0; ) means it is a pure 
+	virtual void Host(FString ServerName) = 0;  // Equal zero ( = 0; ) means it is a pure 
 	virtual void Join(uint32 Index) = 0; // Both methods are virtual because we want them to be implemente by sub-classes and in our case it is the game instance.
 	virtual void LoadMainMenu() = 0;
 	virtual void ExitGame() = 0;

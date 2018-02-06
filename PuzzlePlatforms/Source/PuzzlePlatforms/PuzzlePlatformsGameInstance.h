@@ -33,7 +33,7 @@ public:
 	void LoadPauseMenu();
 
 	UFUNCTION(Exec)
-	void Host() override;
+	void Host(FString ServerName) override;
 	
 	UFUNCTION(Exec)
 	void Join(uint32 Index) override;
@@ -48,9 +48,12 @@ private:
 	TSubclassOf<class UUserWidget> MenuClass;
 	TSubclassOf<class UUserWidget> InGameMenuClass;
 	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
-	class UMainMenu* Menu;
 	IOnlineSessionPtr SessionInterface; // we can't forward declear this bvecause it will need a pointer and it is interface.
+	class UMainMenu* Menu;
 
+
+
+	FString DesiredServerName;
 
 	void OnCreateSessionComplete(FName SessionName, bool Success);
 	void OnDestroySessionComplete(FName SessionName, bool Success);

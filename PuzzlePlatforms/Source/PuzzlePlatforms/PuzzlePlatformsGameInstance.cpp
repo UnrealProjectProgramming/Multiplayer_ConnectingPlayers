@@ -14,6 +14,8 @@
 #include "OnlineSessionSettings.h"
 
 const static FName SESSION_NAME = TEXT("MyGameSession");
+const static FName SERVER_NAME_SETTINGS_KEY = TEXT("ServerName");
+
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectInitializer)
 {
@@ -57,8 +59,9 @@ void UPuzzlePlatformsGameInstance::LoadMenuWidget()
 
 
 
-void UPuzzlePlatformsGameInstance::Host()
+void UPuzzlePlatformsGameInstance::Host(FString ServerName)
 {
+	DesiredServerName = ServerName;
 	if (SessionInterface.IsValid())
 	{
 		auto ExistingSession = SessionInterface->GetNamedSession(SESSION_NAME);
@@ -117,11 +120,21 @@ void UPuzzlePlatformsGameInstance::OnFindSessionsComplete(bool Success)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Found Session Name/s : %s"), *SearchResult.GetSessionIdStr());
 			FServerData Data;
-			Data.Name = SearchResult.GetSessionIdStr();
 			Data.MaxPlayers = SearchResult.Session.SessionSettings.NumPublicConnections; // the number of max players
 		    // without Data.MaxPlayers being subtracted , NumOpenPublicConnections returnrs the number of current avaliable slots 
 			Data.CurrentPlayers = Data.MaxPlayers - SearchResult.Session.NumOpenPublicConnections; 
 			Data.HostUsername = SearchResult.Session.OwningUserName; // TODO get pings  in ms
+			FString ServerName;
+			if (SearchResult.Session.SessionSettings.Get(SERVER_NAME_SETTINGS_KEY, ServerName))
+			{
+				Data.Name = ServerName;
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Failed to get Excpected Data"));
+				Data.Name = "Could not get Server name";
+			}
+
 			ServerNames.Add(Data);
 		}
 
@@ -167,6 +180,9 @@ void UPuzzlePlatformsGameInstance::CreateSession()
 		SessionSettings.NumPublicConnections = 2; // The number of publicly available connections advertised
 		SessionSettings.bShouldAdvertise = true; // Whether this match is publicly advertised on the online service
 		SessionSettings.bUsesPresence = true; //Whether to display user presence information or not	
+		// This will advertiese it over steam and over local network.
+		SessionSettings.Set(SERVER_NAME_SETTINGS_KEY, DesiredServerName, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
+
 		SessionInterface->CreateSession(0, SESSION_NAME, SessionSettings);
 	}
 }
