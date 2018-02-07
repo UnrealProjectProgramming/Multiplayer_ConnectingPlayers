@@ -22,4 +22,9 @@ public:
 private:
 	int32 NumOfPlayers = 0;
 
+	FTimerHandle GameStartTimerHandle;
+
+
+	UFUNCTION()
+	void StartGame();
 };

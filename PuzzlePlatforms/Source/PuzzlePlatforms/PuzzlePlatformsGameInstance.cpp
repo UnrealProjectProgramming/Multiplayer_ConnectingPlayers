@@ -177,7 +177,7 @@ void UPuzzlePlatformsGameInstance::CreateSession()
 		{
 			SessionSettings.bIsLANMatch = false; 
 		}		
-		SessionSettings.NumPublicConnections = 2; // The number of publicly available connections advertised
+		SessionSettings.NumPublicConnections = 5; // The number of publicly available connections advertised
 		SessionSettings.bShouldAdvertise = true; // Whether this match is publicly advertised on the online service
 		SessionSettings.bUsesPresence = true; //Whether to display user presence information or not	
 		// This will advertiese it over steam and over local network.
@@ -197,6 +197,14 @@ void UPuzzlePlatformsGameInstance::Join(uint32 Index)
 		Menu->Teardown();
 	}
 	SessionInterface->JoinSession(0, SESSION_NAME, SessionSearch->SearchResults[Index]);
+}
+
+void UPuzzlePlatformsGameInstance::StartSession()
+{
+	if (SessionInterface.IsValid())
+	{
+		SessionInterface->StartSession(SESSION_NAME);
+	}
 }
 
 void UPuzzlePlatformsGameInstance::LoadMainMenu()
