@@ -96,7 +96,7 @@ void UPuzzlePlatformsGameInstance::OnCreateSessionComplete(FName SessionName, bo
 	UWorld* World = GetWorld();
 	if (!ensure(World != nullptr)) return;
 
-	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen"); // It is very important to put"?listen" so that the server will be ready for players
+	World->ServerTravel("/Game/Maps/Lobby?listen"); // It is very important to put"?listen" so that the server will be ready for players
 																				   // to connect to it via command line like we did in the prev lectuers
 }
 
