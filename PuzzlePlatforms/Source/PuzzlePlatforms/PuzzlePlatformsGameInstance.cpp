@@ -13,7 +13,7 @@
 #include "MenuSystem/MenuWidget.h"
 #include "OnlineSessionSettings.h"
 
-const static FName SESSION_NAME = TEXT("MyGameSession");
+const static FName SESSION_NAME = TEXT("NAME_GameSession");
 const static FName SERVER_NAME_SETTINGS_KEY = TEXT("ServerName");
 
 
