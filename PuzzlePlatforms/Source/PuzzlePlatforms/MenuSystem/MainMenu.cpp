@@ -27,7 +27,10 @@ bool UMainMenu::Initialize()
 	if (!Success) return false;
 
 	if (!ensure(HostButton != nullptr)) return false;
-	HostButton->OnClicked.AddDynamic(this, &UMainMenu::HostServer);
+	HostButton->OnClicked.AddDynamic(this, &UMainMenu::OpenHostAServerMenu);
+
+	if (!ensure(ConfirmHostAServerButton != nullptr)) return false;
+	ConfirmHostAServerButton->OnClicked.AddDynamic(this, &UMainMenu::HostServer);
 
 	if (!ensure(JoinButton != nullptr)) return false;
 	JoinButton->OnClicked.AddDynamic(this, &UMainMenu::OpenJoinMenu);
@@ -35,6 +38,9 @@ bool UMainMenu::Initialize()
 	if (!ensure(CancelButton != nullptr)) return false;
 	CancelButton->OnClicked.AddDynamic(this, &UMainMenu::ReturnToMainMenu);
 	
+	if (!ensure(HostServerCancelButton != nullptr)) return false;
+	HostServerCancelButton->OnClicked.AddDynamic(this, &UMainMenu::ReturnToMainMenu);
+
 	if (!ensure(ConfirmJoinServerButton != nullptr)) return false;
 	ConfirmJoinServerButton->OnClicked.AddDynamic(this, &UMainMenu::JoinServer);
 
@@ -49,7 +55,14 @@ void UMainMenu::HostServer()
 {
 	if (MenuInterface != nullptr)
 	{
-		MenuInterface->Host("Hello");
+		if (!ensure(ServerNameTextBox != nullptr)) return;
+		if (ServerNameTextBox->Text.ToString() == "")
+		{		
+			ServerNameTextBox->HintText = FText::FromString(TEXT("Please Enter A Game Name"));
+			return;
+		}
+		auto ServerName = ServerNameTextBox->GetText().ToString();
+		MenuInterface->Host(ServerName);
 	}
 }
 
@@ -63,6 +76,14 @@ void UMainMenu::OpenJoinMenu()
 	{
 		MenuInterface->RefreshingServerList();
 	}
+}
+
+void UMainMenu::OpenHostAServerMenu()
+{
+	if (!ensure(MenuSwitcher != nullptr)) return;
+	if (!ensure(HostAServerMenu != nullptr)) return;
+
+	MenuSwitcher->SetActiveWidget(HostAServerMenu);
 }
 
 void UMainMenu::ReturnToMainMenu()
