@@ -85,3 +85,6 @@ https://docs.unrealengine.com/latest/INT/API/Plugins/OnlineSubsystem/Interfaces/
 	https://docs.unrealengine.com/latest/INT/Programming/Online/Steam/    check out at the end of the page ( the End Results ).
 
 * enabling GameMode for lobby so that we can start a game when the number of joined players reached a decided number by us , The GameMode only exists on the server ( the one who makes HOST ) ,https://docs.unrealengine.com/latest/INT/Gameplay/Framework/GameMode/
+
+
+* The differences between seamless travel and non seamless travel and how to enable them https://docs.unrealengine.com/latest/INT/Gameplay/Networking/Travelling/

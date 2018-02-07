@@ -21,4 +21,5 @@ public:
 	virtual void Logout(AController* Exiting) override;
 private:
 	int32 NumOfPlayers = 0;
+
 };
