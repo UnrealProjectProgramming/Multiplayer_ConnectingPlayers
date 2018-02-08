@@ -18,6 +18,7 @@ struct FServerData
 	FString Name;
 	uint16 CurrentPlayers;
 	uint16 MaxPlayers;
+	int32 Ping;
 	FString HostUsername;
 	FString PlayerName;
 };
@@ -49,6 +50,9 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* ConfirmJoinServerButton;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* RefreshServerListButton;
 
 	UPROPERTY(meta = (BindWidget))
 	class UButton* QuitButton;
@@ -86,6 +90,9 @@ private:
 
 	UFUNCTION()
 	void OpenJoinMenu();
+
+	UFUNCTION()
+	void RefreshServerList();
 
 	UFUNCTION()
 	void OpenHostAServerMenu();

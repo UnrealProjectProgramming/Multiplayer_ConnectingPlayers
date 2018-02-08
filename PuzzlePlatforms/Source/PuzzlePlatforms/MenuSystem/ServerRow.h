@@ -24,6 +24,8 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* ConnectionFraction;
 
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* PingTextBlock;
 
 
 

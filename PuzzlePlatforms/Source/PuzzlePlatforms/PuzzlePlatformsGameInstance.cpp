@@ -124,6 +124,7 @@ void UPuzzlePlatformsGameInstance::OnFindSessionsComplete(bool Success)
 		    // without Data.MaxPlayers being subtracted , NumOpenPublicConnections returnrs the number of current avaliable slots 
 			Data.CurrentPlayers = Data.MaxPlayers - SearchResult.Session.NumOpenPublicConnections; 
 			Data.HostUsername = SearchResult.Session.OwningUserName; // TODO get pings  in ms
+			Data.Ping = SearchResult.PingInMs;
 			FString ServerName;
 			if (SearchResult.Session.SessionSettings.Get(SERVER_NAME_SETTINGS_KEY, ServerName))
 			{

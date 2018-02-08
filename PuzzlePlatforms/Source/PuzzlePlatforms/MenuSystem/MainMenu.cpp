@@ -17,8 +17,6 @@ UMainMenu::UMainMenu(const FObjectInitializer & ObjectInitializer)
 	ConstructorHelpers::FClassFinder<UUserWidget> ServerRowBPClass(TEXT("/Game/MainMenu/WBP_ServerRow"));
 	if (!ensure(ServerRowBPClass.Class != nullptr)) return; //Pointer to a class object that we can later use to instanciate other objects 
 	ServerRowClass = ServerRowBPClass.Class;
-
-
 }
 
 bool UMainMenu::Initialize()
@@ -34,6 +32,9 @@ bool UMainMenu::Initialize()
 
 	if (!ensure(JoinButton != nullptr)) return false;
 	JoinButton->OnClicked.AddDynamic(this, &UMainMenu::OpenJoinMenu);
+
+	if (!ensure(RefreshServerListButton != nullptr)) return false;
+	RefreshServerListButton->OnClicked.AddDynamic(this, &UMainMenu::RefreshServerList);
 
 	if (!ensure(CancelButton != nullptr)) return false;
 	CancelButton->OnClicked.AddDynamic(this, &UMainMenu::ReturnToMainMenu);
@@ -72,6 +73,14 @@ void UMainMenu::OpenJoinMenu()
 	if (!ensure(JoinMenu != nullptr)) return;
 
 	MenuSwitcher->SetActiveWidget(JoinMenu);
+	if (MenuInterface != nullptr)
+	{
+		MenuInterface->RefreshingServerList();
+	}
+}
+
+void UMainMenu::RefreshServerList()
+{
 	if (MenuInterface != nullptr)
 	{
 		MenuInterface->RefreshingServerList();
@@ -132,6 +141,9 @@ void UMainMenu::SetServerList(TArray<FServerData> ServerNames)
 		Row->HostUsername->SetText(FText::FromString(ServerData.HostUsername));
 		FString FractionText = FString::Printf(TEXT("%d/%d"), ServerData.CurrentPlayers, ServerData.MaxPlayers);
 		Row->ConnectionFraction->SetText(FText::FromString(FractionText));
+		int32 Ping = ServerData.Ping;
+		FString PingAsString = FString::FromInt(Ping);
+		Row->PingTextBlock->SetText(FText::FromString(PingAsString));
 		Row->Setup(this, i);
 		i++;
 		ServerList->AddChild(Row);
