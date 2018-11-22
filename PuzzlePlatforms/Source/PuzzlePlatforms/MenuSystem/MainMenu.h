@@ -36,8 +36,10 @@ public:
 	void SetServerList(TArray<FServerData> ServerNames);
 	void SelectIndex(uint32 Index);
 
+
 protected:
 	virtual bool Initialize() override;
+
 private:
 	UPROPERTY(meta = (BindWidget))
 	class UButton* HostButton;
@@ -105,7 +107,6 @@ private:
 
 	UFUNCTION()
 	void QuitClicked();
-
 
 	void UpdateChildren();
 

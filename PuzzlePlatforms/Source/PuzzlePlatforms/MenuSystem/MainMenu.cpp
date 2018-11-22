@@ -52,6 +52,7 @@ bool UMainMenu::Initialize()
 	return true;
 }
 
+
 void UMainMenu::HostServer()
 {
 	if (MenuInterface != nullptr)
@@ -168,6 +169,5 @@ void UMainMenu::UpdateChildren()
 		auto Row = Cast<UServerRow>(ServerList->GetChildAt(i)); 
 		if (!ensure(Row != nullptr)) return;
 		Row->Selected = (SelectedIndex.IsSet() && SelectedIndex.GetValue() == i); // Using the short circuit and.
-
 	}
 }
