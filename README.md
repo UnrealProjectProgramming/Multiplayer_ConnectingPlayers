@@ -1,3 +1,20 @@
+* Stage One: 
+	* Connecting Players via local network in ue4 through Hamachi(VPN).
+	* Client and server approach and why it is better than peer to peer approach.
+	* Replications and Server Authority (Server always right and has the authority to replicate other actors).
+	* Hosting Server with server Travel that makes the players travel from (Lobby to Game Map).
+	* All of that with Using Ue4 Command line in next stage i improved that.
+* Stage Two:
+	* Creating Advanced UI Menu so players can connect without the use of command line.
+	* Creating Menu Elements using C++.
+	* After this stage we start enabling the steam subsystem.
+* Stage Three:
+	* Using Steam SDK and UE4 Online Subsystem to make multiplayer functionality.
+	* Creating and joining Sessions.
+	* enabling GameMode for lobby so that we can start a game when the number of joined players reached a decided number by us
+	* seamless travel and non seamless travel
+	
+	
 #   Multiplayer_ConnectingPlayers
 ##  Connecting Players via local network in unreal engine 4
 
